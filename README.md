@@ -1,83 +1,171 @@
 # TypeFlow – Touch Typing Trainer
 
-An interactive touch typing practice app built with React. It trains the eight home-row keys
-**A S D F J K L ;** with a short warm-up, then a timed word test.
+An interactive touch typing practice app built with React. It trains the eight home-row keys:
 
-**Live demo:** _add your deployed link here_
+**A S D F J K L ;**
+
+The app starts with a short warm-up and then provides a customizable timed typing test.
+
+**Live Demo:** *Add your deployed link here*
 
 ## Features
 
-- **Custom test length:** 1, 2 or 3 minutes, or any custom time from 0.5 to 60 minutes
-- **Two-step session:** type two warm-up lines correctly, then the timed word test starts
-- **Word test:** real words (`ask`, `salad`, `flask`) mixed with practice combinations, built only from the allowed keys
-- **Instant error feedback:** the typing display turns red and shakes on a wrong key, and stays red until the correct key is pressed
-- **Next-key indicator:** an on-screen keyboard highlights the next key and flashes each key you press
-- **Live stats:** time left, WPM, accuracy, keys pressed and errors, plus a progress bar
-- **Results page:** final WPM, accuracy, keys pressed, correct keys, errors and duration
-- **Home page demo:** a 30 second typing demo, features and how-it-works sections
-- **Responsive design:** works on desktop and mobile, with a collapsible navbar
+* **Custom test length:** Choose 1, 2, or 3 minutes, or set any custom duration from 0.5 to 60 minutes.
+* **Two-step session:** Type two warm-up lines correctly before the timed word test begins.
+* **Word test:** Practice with real words such as `ask`, `salad`, and `flask`, mixed with typing combinations generated only from the allowed keys.
+* **Instant error feedback:** The typing display turns red and shakes when an incorrect key is pressed and remains red until the correct key is entered.
+* **Next-key indicator:** An on-screen keyboard highlights the next key to press and flashes each key as it is typed.
+* **Live statistics:** View time remaining, WPM, accuracy, keys pressed, errors, and test progress in real time.
+* **Results page:** Displays final WPM, accuracy, keys pressed, correct keys, errors, and test duration.
+* **Home page demo:** Includes a 30-second interactive typing demonstration, features, and a how-it-works section.
+* **Responsive design:** Works across desktop and mobile devices with a responsive, collapsible navigation bar.
 
-## How it works
+## How It Works
 
-| Metric | Calculation |
-|---|---|
-| WPM | correct keys ÷ 5 ÷ minutes elapsed (standard: 5 characters = 1 word) |
-| Accuracy | correct key presses ÷ total key presses × 100 |
-| Keys pressed | correct + wrong key presses in the timed word test |
+| Metric           | Calculation                                            |
+| ---------------- | ------------------------------------------------------ |
+| **WPM**          | Correct keys ÷ 5 ÷ minutes elapsed                     |
+| **Accuracy**     | Correct key presses ÷ total key presses × 100          |
+| **Keys Pressed** | Correct + wrong key presses during the timed word test |
 
-- A wrong key never moves the cursor forward, so the user must correct it.
-- The timer starts on the first key of the word test, not when the page loads.
-- The warm-up is not timed and is not counted in the stats.
+The typing engine follows these rules:
 
-## Tech stack
+* A wrong key never moves the cursor forward. The user must press the correct key.
+* The timer starts when the first key of the timed word test is pressed.
+* The warm-up phase is not timed and is not included in the final statistics.
+* The test uses only the configured home-row keys.
 
-- React + Vite
-- Redux Toolkit (test settings and results)
-- React Router (pages)
-- `useReducer` custom hook for the typing engine
-- CSS3 (custom properties, grid, flexbox, animations)
+## Tech Stack
 
-## Getting started
+* **React**
+* **Vite**
+* **Redux Toolkit** – Test settings and results
+* **React Router** – Application pages and navigation
+* **useReducer** – Typing engine state management
+* **CSS3** – Custom properties, Grid, Flexbox, animations, and responsive design
+
+## Getting Started
+
+### 1. Clone the repository
 
 ```bash
-git clone https://github.com/<your-username>/<repo-name>.git
-cd <repo-name>
+git clone https://github.com/zororonin/typeflow-touch-typing.git
+```
+
+### 2. Open the project directory
+
+```bash
+cd typeflow-touch-typing
+```
+
+### 3. Install dependencies
+
+```bash
 npm install
+```
+
+### 4. Start the development server
+
+```bash
 npm run dev
 ```
 
-Then open the local URL shown in the terminal (usually http://localhost:5173).
+Then open the local URL shown in the terminal.
 
-Build for production:
+Usually:
+
+```text
+http://localhost:5173
+```
+
+## Build for Production
+
+Create a production build:
 
 ```bash
 npm run build
+```
+
+Preview the production build locally:
+
+```bash
 npm run preview
 ```
 
-## Project structure
+## Project Structure
 
-```
+```text
 src/
-├── components/   Navbar, Footer, Hero, TypingDemo, TypingPrompt,
-│                 Stats, ProgressBar, Keyboard, FeatureCard, Steps
-├── data/         allowed keys, warm-up lines, word list
-├── hooks/        useTypingTest (typing engine)
-├── pages/        Home, Practice, Test, Results, About
-├── store/        Redux Toolkit store and typing slice
-└── utils/        text generator, time formatting
+├── components/
+│   ├── Navbar
+│   ├── Footer
+│   ├── Hero
+│   ├── TypingDemo
+│   ├── TypingPrompt
+│   ├── Stats
+│   ├── ProgressBar
+│   ├── Keyboard
+│   ├── FeatureCard
+│   └── Steps
+│
+├── data/
+│   ├── Allowed keys
+│   ├── Warm-up lines
+│   └── Word list
+│
+├── hooks/
+│   └── useTypingTest
+│
+├── pages/
+│   ├── Home
+│   ├── Practice
+│   ├── Test
+│   ├── Results
+│   └── About
+│
+├── store/
+│   ├── Redux Toolkit store
+│   └── Typing slice
+│
+└── utils/
+    ├── Text generator
+    └── Time formatting
 ```
 
-## Changing the key set
+## Allowed Key Set
 
-All allowed keys live in one constant in `src/data/typingData.js`:
+TypeFlow currently focuses on the eight home-row keys:
+
+```text
+A S D F J K L ;
+```
+
+The allowed keys are defined in:
+
+```text
+src/data/typingData.js
+```
+
+For example:
 
 ```js
-export const HOME_KEYS = ['a', 's', 'd', 'f', 'j', 'k', 'l', ';']
+export const HOME_KEYS = ['a', 's', 'd', 'f', 'j', 'k', 'l', ';'];
 ```
 
-## Possible improvements
+This centralized configuration makes it easier to expand the trainer with additional key sets in the future.
 
-- Save best scores and session history in localStorage
-- Difficulty levels and text categories
-- Performance graph on the results page
+## Future Improvements
+
+Potential improvements include:
+
+* Save best scores and session history using `localStorage`
+* Add difficulty levels
+* Add different typing text categories
+* Add a performance graph to the results page
+* Add personal typing history and progress tracking
+* Add additional keyboard rows and key combinations
+* Add user accounts and cloud-based score tracking
+
+## License
+
+This project was created as a React learning and portfolio project.
